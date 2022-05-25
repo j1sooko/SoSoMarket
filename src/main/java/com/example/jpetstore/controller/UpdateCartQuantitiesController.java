@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.jpetstore.domain.Cart;
-import com.example.jpetstore.domain.CartItem;
+import com.example.jpetstore.domain.Wish;
+import com.example.jpetstore.domain.Wish;
 
 /**
  * @author Juergen Hoeller
@@ -24,7 +24,7 @@ public class UpdateCartQuantitiesController {
 	@RequestMapping("/shop/updateCartQuantities.do")
 	public ModelAndView handleRequest(
 			HttpServletRequest request,	
-			@ModelAttribute("sessionCart") Cart cart) throws Exception {
+			@ModelAttribute("sessionCart") Wish cart) throws Exception {
 		Iterator<CartItem> cartItems = cart.getAllCartItems();
 		while (cartItems.hasNext()) {
 			CartItem cartItem = (CartItem) cartItems.next();

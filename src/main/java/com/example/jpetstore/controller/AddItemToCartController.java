@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import com.example.jpetstore.domain.Cart;
+import com.example.jpetstore.domain.Wish;
 import com.example.jpetstore.domain.Item;
 import com.example.jpetstore.service.PetStoreFacade;
 
@@ -28,14 +28,14 @@ public class AddItemToCartController {
 	}
 
 	@ModelAttribute("sessionCart")
-	public Cart createCart() {
-		return new Cart();
+	public Wish createCart() {
+		return new Wish();
 	}
 	
 	@RequestMapping("/shop/addItemToCart.do")
 	public ModelAndView handleRequest(
 			@RequestParam("workingItemId") String workingItemId,
-			@ModelAttribute("sessionCart") Cart cart 
+			@ModelAttribute("sessionCart") Wish cart 
 			) throws Exception {
 		if (cart.containsItemId(workingItemId)) {
 			cart.incrementQuantityByItemId(workingItemId);

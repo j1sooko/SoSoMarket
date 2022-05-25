@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import com.example.jpetstore.domain.Account;
-import com.example.jpetstore.domain.Cart;
+import com.example.jpetstore.domain.Wish;
 import com.example.jpetstore.service.OrderValidator;
 import com.example.jpetstore.service.PetStoreFacade;
 
@@ -49,7 +49,7 @@ public class OrderController {
 	
 	@RequestMapping("/shop/newOrder.do")
 	public String initNewOrder(HttpServletRequest request,
-			@ModelAttribute("sessionCart") Cart cart,
+			@ModelAttribute("sessionCart") Wish cart,
 			@ModelAttribute("orderForm") OrderForm orderForm
 			) throws ModelAndViewDefiningException {
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");

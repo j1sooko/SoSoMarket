@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.example.jpetstore.domain.Cart;
+import com.example.jpetstore.domain.Wish;
 
 /**
  * @author Juergen Hoeller
@@ -23,9 +23,9 @@ import com.example.jpetstore.domain.Cart;
 public class ViewCartController { 
 	
 	@ModelAttribute("sessionCart")
-	public Cart createCart(HttpSession session) {
-		Cart cart = (Cart)session.getAttribute("sessionCart");
-		if (cart == null) cart = new Cart();
+	public Wish createCart(HttpSession session) {
+		Wish cart = (Wish)session.getAttribute("sessionCart");
+		if (cart == null) cart = new Wish();
 		return cart;
 	}
 	
@@ -33,7 +33,7 @@ public class ViewCartController {
 	public ModelAndView viewCart(
 			HttpServletRequest request,
 			@RequestParam(value="page", required=false) String page,
-			@ModelAttribute("sessionCart") Cart cart) 
+			@ModelAttribute("sessionCart") Wish cart) 
 			throws Exception {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
@@ -45,7 +45,7 @@ public class ViewCartController {
 	public ModelAndView checkout(
 			HttpServletRequest request,
 			@RequestParam(value="page", required=false) String page,
-			@ModelAttribute("sessionCart") Cart cart) 
+			@ModelAttribute("sessionCart") Wish cart) 
 			throws Exception {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
@@ -53,7 +53,7 @@ public class ViewCartController {
 		return new ModelAndView("Checkout", "cart", cart);
 	}
 	
-	private void handleRequest(String page, Cart cart, UserSession userSession)
+	private void handleRequest(String page, Wish cart, UserSession userSession)
 			throws Exception {
 		if (userSession != null) {
 			if ("next".equals(page)) {

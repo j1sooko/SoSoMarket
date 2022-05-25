@@ -53,7 +53,7 @@ import com.example.jpetstore.domain.Product;
  */
 @Service
 @Transactional
-public class PetStoreImpl implements PetStoreFacade { 
+public class SosoMarketImpl implements SosoMarketFacade {
 	@Autowired
 	private AccountDao accountDao;
 	@Autowired
@@ -61,19 +61,25 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Autowired
 	private ProductDao productDao;
 	@Autowired
-	private ItemDao itemDao;
-	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private AuctionDao auctionDao;
+	@Autowired
+	private BiddingDao biddingDao;
+	@Autowired
+	private WishDao wishDao;
 
-	//-------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
-	//-------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
 
-	public Account getAccount(String username) {
+	/* Account */
+
+	public Account getAccount(String accountId) {
 		return accountDao.getAccount(username);
 	}
 
-	public Account getAccount(String username, String password) {
+	public Account getAccount(String accountId, String password) {
 		return accountDao.getAccount(username, password);
 	}
 
@@ -85,9 +91,15 @@ public class PetStoreImpl implements PetStoreFacade {
 		accountDao.updateAccount(account);
 	}
 
-	public List<String> getUsernameList() {
-		return accountDao.getUsernameList();
+	public void deleteAccount(Account accountId) {
+		accountDao.deleteAccount(accountId);
 	}
+
+	public void updateWithdraw(Account accountId) {
+		accountDao.updateWithdraw(accountId);
+	}
+
+	/* Category */
 
 	public List<Category> getCategoryList() {
 		return categoryDao.getCategoryList();
@@ -97,40 +109,127 @@ public class PetStoreImpl implements PetStoreFacade {
 		return categoryDao.getCategory(categoryId);
 	}
 
+	/* Product */
+
 	public List<Product> getProductListByCategory(String categoryId) {
 		return productDao.getProductListByCategory(categoryId);
 	}
 
-	public List<Product> searchProductList(String keywords) {
-		return productDao.searchProductList(keywords);
+	public List<Product> getProductListByUser(String accountId) {
+		return productDao.getProductListByUser(accountId);
 	}
 
-	public Product getProduct(String productId) {
+	public List<Product> searchProductList(String keyword) {
+		return productDao.searchProductList(keyword);
+	}
+
+	public Product getProduct(int productId) {
 		return productDao.getProduct(productId);
 	}
 
-	public List<Item> getItemListByProduct(String productId) {
-		return itemDao.getItemListByProduct(productId);
+	public List<Product> getAllProduct() {
+		return productDao.getAllProduct();
 	}
 
-	public Item getItem(String itemId) {
-		return itemDao.getItem(itemId);
+	public void updateProduct(int productId) {
+		productDao.updateProduct(productId);
 	}
 
-	public boolean isItemInStock(String itemId) {
-		return itemDao.isItemInStock(itemId);
+	public void insertProduct(Product product) {
+		productDao.insertProduct(product);
 	}
 
-	public void insertOrder(Order order) {
-		itemDao.updateQuantity(order);	    
-		orderDao.insertOrder(order);
+	public void deleteProduct(int productId) {
+		productDao.deleteProduct(productId);
+	}
+
+	public void updateProductStatus(Product product) {
+		productDao.updateProductStatus(product);
+	}
+
+	/* auction */
+
+	public List<Auction> getAuctionListByUser(String accountId) {
+		return auctionDao.getAuctionListByUser(accountId);
+	}
+
+	public List<Auction> getAuctionListByCategory(int categoryId) {
+		return auctionDao.getAuctionListByCategory(categoryId);
+	}
+
+	public List<Auction> searchAuctionList(String keyword) {
+		return auctionDao.searchAuctionList(keywords);
+	}
+
+	public Auction getAuction(int auctionId) {
+		return auctionDao.getAuction(auctionId);
 	}
 	
+	public void insertAuction(Auction auction) {
+		auctionDao.insertAuction(auction);
+	}
+
+	public void deleteAuction(int auctionId) {
+		auctionDao.deleteAuction(auctionId);
+	}
+
+	public void updateAuctionStatus(Auction auction) {
+		auctionDao.updateAuctionStatus(auction);
+	}
+
+	/* Bidding */
+
+	public void insertBidding(Auction bidding) {
+		biddingDao.insertBidding(bidding);
+	}
+
+	public Bidding getBidding(int biddingId) {
+		return biddingDao.getBidding(biddingId);
+	}
+
+	public List<Bidding> getBiddingsByUser(String accountId) {
+		return biddingDao.getBiddingsByUser(accountId);
+	}
+
+	public List<Bidding> getBiddingsByProduct(int auctionId) {
+		return biddingDao.getBiddingsByProduct(auctionId);
+	}
+
+
+	/* order */
+
+	public void insertOrder(Order order) {
+		orderDao.insertOrder(order);
+	}
+
 	public Order getOrder(int orderId) {
 		return orderDao.getOrder(orderId);
 	}
 
-	public List<Order> getOrdersByUsername(String username) {
-		return orderDao.getOrdersByUsername(username);
+	public List<Order> getOrderListByBuyer(String accountId) {
+		return orderDao.getOrderListByBuyer(accountId);
 	}
+
+	public List<Order> getOrderListBySeller(String accountId) {
+		return orderDao.getOrderListBySeller(accountId);
+	}
+
+	public void updateOrderStatus(Order order) {
+		orderDao.updateOrderStatus(order);
+	}
+
+	/* wish */
+
+	public void insertWish(Wish wish) {
+		wishDao.insertWish(wish);
+	}
+
+	public void deleteWish(int wishId) {
+		return wishDao.deleteWish(wishId);
+	}
+
+	public Wish<Auction> getWishListByUser(String accountId) {
+		return wishDao.getWishListByUser(accountId);
+	}
+
 }

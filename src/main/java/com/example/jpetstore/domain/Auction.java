@@ -1,84 +1,75 @@
 package com.example.jpetstore.domain;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.support.PagedListHolder;
 
 @SuppressWarnings("serial")
-public class Cart implements Serializable {
+public class Auction implements Serializable {
 
-  /* Private Fields */
+	/* Private Fields */
 
-  private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
-	
-  private final PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
+	private int auctionId;
+	private Product product;
+	private int currentPrice;
+	private int startPrice;
+	private Date deadLine;
+	private List<Bidding> biddingList = new ArrayList<Bidding>();
 
-  /* JavaBeans Properties */
-
-	public Cart() {
-		this.itemList.setPageSize(4);
+	public int getAuctionId() {
+		return auctionId;
 	}
 
-	public Iterator<CartItem> getAllCartItems() { return itemList.getSource().iterator(); }
-  public PagedListHolder<CartItem> getCartItemList() { return itemList; }
-  public int getNumberOfItems() { return itemList.getSource().size(); }
+	public void setAuctionId(int auctionId) {
+		this.auctionId = auctionId;
+	}
 
-  /* Public Methods */
+	public Product getProduct() {
+		return product;
+	}
 
-  public boolean containsItemId(String itemId) {
-    return itemMap.containsKey(itemId);
-  }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-  public void addItem(Item item, boolean isInStock) {
-    CartItem cartItem = itemMap.get(item.getItemId());
-    if (cartItem == null) {
-      cartItem = new CartItem();
-      cartItem.setItem(item);
-      cartItem.setQuantity(0);
-      cartItem.setInStock(isInStock);
-      itemMap.put(item.getItemId(), cartItem);
-      itemList.getSource().add(cartItem);
-    }
-    cartItem.incrementQuantity();
-  }
+	public int getCurrentPrice() {
+		return currentPrice;
+	}
 
+	public void setCurrentPrice(int currentPrice) {
+		this.currentPrice = currentPrice;
+	}
 
-  public Item removeItemById(String itemId) {
-    CartItem cartItem = itemMap.remove(itemId);
-    if (cartItem == null) {
-      return null;
-    }
-		else {
-      itemList.getSource().remove(cartItem);
-      return cartItem.getItem();
-    }
-  }
+	public int getStartPrice() {
+		return startPrice;
+	}
 
-  public void incrementQuantityByItemId(String itemId) {
-    CartItem cartItem = itemMap.get(itemId);
-    cartItem.incrementQuantity();
-  }
+	public void setStartPrice(int startPrice) {
+		this.startPrice = startPrice;
+	}
 
-  public void setQuantityByItemId(String itemId, int quantity) {
-    CartItem cartItem = itemMap.get(itemId);
-    cartItem.setQuantity(quantity);
-  }
+	public Date getDeadLine() {
+		return deadLine;
+	}
 
-  public double getSubTotal() {
-    double subTotal = 0;
-    Iterator<CartItem> items = getAllCartItems();
-    while (items.hasNext()) {
-      CartItem cartItem = (CartItem) items.next();
-      Item item = cartItem.getItem();
-      double listPrice = item.getListPrice();
-      int quantity = cartItem.getQuantity();
-      subTotal += listPrice * quantity;
-    }
-    return subTotal;
-  }
+	public void setDeadLine(Date deadLine) {
+		this.deadLine = deadLine;
+	}
+
+	public void setBiddingList(List<Bidding> biddingList) {
+		this.biddingList = biddingList;
+	}
+
+	public List<Bidding> getBiddingList() {
+		return biddingList;
+	}
+	
+	// 구현필요
+	public boolean getPriceValidate(String auctionId, int biddingPrice) {
+		return true;
+	}
 
 }

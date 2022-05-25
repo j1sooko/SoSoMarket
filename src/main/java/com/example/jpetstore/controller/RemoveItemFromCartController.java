@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.jpetstore.domain.Cart;
+import com.example.jpetstore.domain.Wish;
 
 /**
  * @author Juergen Hoeller
@@ -21,7 +21,7 @@ public class RemoveItemFromCartController {
 	@RequestMapping("/shop/removeItemFromCart.do")
 	public ModelAndView handleRequest(
 			@RequestParam("workingItemId") String workingItemId,
-			@ModelAttribute("sessionCart") Cart cart
+			@ModelAttribute("sessionCart") Wish cart
 		) throws Exception {
 		cart.removeItemById(workingItemId);
 		return new ModelAndView("Cart", "cart", cart);
