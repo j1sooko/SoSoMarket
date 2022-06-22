@@ -10,15 +10,16 @@
 				<nav class="d-none d-md-block" aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="#">계정</a></li>
-						<li class="breadcrumb-item active" aria-current="page">위시리스트</li>
+						<li class="breadcrumb-item"><a href="<c:url value="/user/viewWishList.do"/>">위시리스트</a></li>
+						<li class="breadcrumb-item active" aria-current="page">일반상품</li>
 					</ol>
 				</nav>
 				<!-- End Breadcrumb -->
 
 				<div class="mb-3 mb-md-4 d-flex justify-content-between">
-					<div class="h3 mb-0">위시리스트</div>
+					<div class="h3 mb-0">일반상품 위시리스트</div>
 				</div>
-				<p style="font-size: small;">상품 정보에서 ♡ 클릭 시 위시리스트에 저장됩니다.</p>
+				<p style="font-size: small;">일반상품의 ♡를 클릭 시 위시리스트에 저장됩니다.</p>
 
 
 				<!-- Wish List -->
@@ -43,9 +44,9 @@
 										</div>
 									</td>
 									<td class="py-3">
-										<c:if test="${bidding.product.productStatus eq 'sale'}">
+										<c:if test="${wish.product.productStatus eq 'sale'}">
 											<span class="badge badge-pill badge-success">판매중</span>
-										</c:if> <c:if test="${bidding.product.productStatus eq 'done'}">
+										</c:if> <c:if test="${wish.product.productStatus eq 'done'}">
 											<span class="badge badge-pill badge-secondary">판매완료</span>
 										</c:if></td>
 									<td class="py-3">
@@ -67,15 +68,17 @@
 							aria-label="Pagination">
 							<ul
 								class="pagination justify-content-end font-weight-semi-bold mb-0">
-								<c:if test="${!biddingList.firstPage}">
+								<c:if test="${!wishList.firstPage}">
 									<li class="page-item"><a id="datatablePaginationPrev"
-										class="page-link" href="?page=previous" aria-label="Previous"><i
+										class="page-link" href='<c:url value="/user/viewWishList2.do">
+            <c:param name="page" value="previous"/></c:url>' aria-label="Previous"><i
 											class="gd-angle-left icon-text icon-text-xs d-inline-block"></i></a>
 									</li>
 								</c:if>
-								<c:if test="${!biddingList.lastPage}">
+								<c:if test="${!wishList.lastPage}">
 									<li class="page-item"><a id="datatablePaginationNext"
-										class="page-link" href="?page=next" aria-label="Next"><i
+										class="page-link" href='<c:url value="/user/viewWishList2.do">
+            <c:param name="page" value="previous"/></c:url>' aria-label="Next"><i
 											class="gd-angle-right icon-text icon-text-xs d-inline-block"></i></a>
 									</li>
 								</c:if>

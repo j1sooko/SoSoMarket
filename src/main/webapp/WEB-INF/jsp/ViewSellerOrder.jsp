@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%@ include file="IncludeMypageHeader.jsp"%>
+
 <div class="content">
 	<div class="py-4 px-3 px-md-4">
 		<div class="card mb-3 mb-md-4">
@@ -51,17 +52,38 @@
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td colspan="2"><b><font size="4">주문 상태:</font>
+							<td colspan="2"><b><font size="4">현재 주문 상태:</font>
 							<c:if test="${order.orderStatus eq 'waiting'}">
-									주문확인중</b></td>
+									주문확인중
 							</c:if>
 							<c:if test="${order.orderStatus eq 'check'}">
-								배송준비중</b></td>
+								배송준비중
 							</c:if>
 							<c:if test="${order.orderStatus eq 'start'}">
-								배송중</b></td>
+								배송중
 							</c:if>
+							</b></td>
 						</tr>
+						<tr><td>&nbsp;</td></tr>
+						<tr>
+							<td colspan="2"><b><font size="4">주문 상태 변경:</font></b></td>
+						</tr>
+						<tr>
+						<tr><td>&nbsp;</td></tr>
+						<form action="<c:url value="/user/updateOrder.do"/>" method="post" id="myForm">
+							<td>
+								<select name="orderStatus" form="myForm" class="select">
+								    <option value="waiting">주문 확인중</option>
+								    <option value="check">배송 준비중</option>
+								    <option value="start">배송 중</option>
+								</select>
+							</td>
+							<td>
+								<input type="hidden" name="orderId" value="${order.orderId}" />
+								<button type="submit" class="btn btn-primary float-right">변경</button>
+							
+							</td>
+						</form></tr>
 						<tr>
 							<td>&nbsp;</td>
 						</tr>

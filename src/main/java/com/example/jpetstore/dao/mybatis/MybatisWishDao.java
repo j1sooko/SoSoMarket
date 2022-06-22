@@ -27,8 +27,12 @@ public class MybatisWishDao implements WishDao {
 		return wishMapper.getWishByAccountAndProduct(accountId, productId);
 	}
 
-    public List<Wish> getWishtListByUser(String accountId) throws DataAccessException {
-    	return wishMapper.getWishtListByUser(accountId);
+    public List<Wish> getWishListByUser(String accountId) throws DataAccessException {
+    	return wishMapper.getWishListByUser(accountId);
+    }
+    
+    public List<Wish> getWishListAuctionByUser(String accountId) throws DataAccessException {
+    	return wishMapper.getWishListAuctionByUser(accountId);
     }
     
     public void insertWish(Wish wish) throws DataAccessException {

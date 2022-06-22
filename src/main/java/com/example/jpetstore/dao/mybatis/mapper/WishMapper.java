@@ -24,7 +24,9 @@ public interface WishMapper {
 	
 	Wish getWishByAccountAndProduct(String accountId, int productId);
 
-    List<Wish> getWishtListByUser(String accountId);
+    List<Wish> getWishListByUser(String accountId);
+    
+    List<Wish> getWishListAuctionByUser(String accountId);
     
     void insertWish(Wish wish);
 
