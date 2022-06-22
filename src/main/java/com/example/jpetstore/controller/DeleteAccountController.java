@@ -36,7 +36,7 @@ public class DeleteAccountController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String handleRequest(
+	public String onSubmit(
 			HttpServletRequest request, HttpSession session,
 			@ModelAttribute("accountForm") AccountForm accountForm,
 			@ModelAttribute("userSession") UserSession userSession,
