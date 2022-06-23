@@ -6,13 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.jpetstore.service.SosoMarketFacade;
 
 @Controller
 @RequestMapping("/user/deleteUser.do")
-@SessionAttributes("userSession")
+
 public class DeleteAccountController { 
 
 	@Autowired
@@ -30,10 +29,10 @@ public class DeleteAccountController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView handleRequest(
-			@ModelAttribute("userSession") UserSession userSession,
 			HttpSession session
 		) throws Exception {
 		
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		String accountId = userSession.getAccount().getAccountId();
 		sosoMarket.deleteAccount(accountId);
 		session.removeAttribute("userSession");

@@ -15,7 +15,7 @@ import com.example.jpetstore.service.SosoMarketFacade;
 
 @Controller
 @RequestMapping({"/shop/newBidding.do","/shop/insertBidding.do"})
-@SessionAttributes("biddingForm")
+@SessionAttributes({"biddingForm", "userSession"})
 public class BiddingController { 
 	
 	@Value("BiddingForm")
