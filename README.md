@@ -23,7 +23,7 @@
 ## ⚙️ 개발 환경 및 기술
 #### 개발 환경
 - Oracle SQL Developer, Eclipse, Tomcat, ERwin
-- Github
+- Github, 
 
 
 #### 사용 기술
